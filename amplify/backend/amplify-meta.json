@@ -11,5 +11,27 @@
       "StackId": "arn:aws:cloudformation:ap-northeast-1:061479315140:stack/amplify-amplify0322-dev-200149/0261c420-8afe-11eb-85c3-0e2500a119af",
       "AmplifyAppId": "d3lko2zbw0k73q"
     }
+  },
+  "auth": {
+    "amplify032269327c15": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify0322-dev-200149-deployment/amplify-cfn-templates/auth/amplify032269327c15-cloudformation-template.yml",
+        "logicalId": "authamplify032269327c15"
+      },
+      "lastPushTimeStamp": "2021-03-22T11:18:23.488Z",
+      "output": {
+        "UserPoolId": "ap-northeast-1_EL62McmbB",
+        "AppClientIDWeb": "1qcvmqnjrh3lkmdle57rse6qbu",
+        "AppClientID": "1vrpugd6cpsa1q6p89ua5gvg3k",
+        "IdentityPoolId": "ap-northeast-1:b8319142-504e-4408-8a13-ecc686a9b10b",
+        "IdentityPoolName": "amplify032269327c15_identitypool_69327c15__dev",
+        "UserPoolName": "amplify032269327c15_userpool_69327c15"
+      },
+      "lastPushDirHash": "ZLfiy2jHjNmboj4OEH5zizU9v24="
+    }
   }
 }
