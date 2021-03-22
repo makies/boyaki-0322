@@ -1,9 +1,9 @@
-type Todo {
-  id: ID!
-  name: String!
-  description: String
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
+type Post {
+  type: String!
+  id: ID
+  content: String!
+  owner: String
+  timestamp: Int!
 }
 
 enum ModelSortDirection {
@@ -11,8 +11,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelTodoConnection {
-  items: [Todo]
+type ModelPostConnection {
+  items: [Post]
   nextToken: String
 }
 
@@ -89,13 +89,15 @@ input ModelSizeInput {
   between: [Int]
 }
 
-input ModelTodoFilterInput {
+input ModelPostFilterInput {
+  type: ModelStringInput
   id: ModelIDInput
-  name: ModelStringInput
-  description: ModelStringInput
-  and: [ModelTodoFilterInput]
-  or: [ModelTodoFilterInput]
-  not: ModelTodoFilterInput
+  content: ModelStringInput
+  owner: ModelStringInput
+  timestamp: ModelIntInput
+  and: [ModelPostFilterInput]
+  or: [ModelPostFilterInput]
+  not: ModelPostFilterInput
 }
 
 enum ModelAttributeTypes {
@@ -112,42 +114,48 @@ enum ModelAttributeTypes {
 }
 
 type Query {
-  getTodo(id: ID!): Todo
-  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  getPost(id: ID!): Post
+  listPosts(filter: ModelPostFilterInput, limit: Int, nextToken: String): ModelPostConnection
+  listPostsSortedByTimestamp(type: String, timestamp: ModelIntKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelPostFilterInput, limit: Int, nextToken: String): ModelPostConnection
+  listPostsBySpecificOwner(owner: String, timestamp: ModelIntKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelPostFilterInput, limit: Int, nextToken: String): ModelPostConnection
 }
 
-input CreateTodoInput {
+input CreatePostInput {
+  type: String!
   id: ID
-  name: String!
-  description: String
+  content: String!
+  owner: String
+  timestamp: Int!
 }
 
-input UpdateTodoInput {
-  id: ID!
-  name: String
-  description: String
-}
-
-input DeleteTodoInput {
+input DeletePostInput {
   id: ID
 }
 
 type Mutation {
-  createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
-  updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
-  deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
+  createPost(input: CreatePostInput!, condition: ModelPostConditionInput): Post
+  deletePost(input: DeletePostInput!, condition: ModelPostConditionInput): Post
 }
 
-input ModelTodoConditionInput {
-  name: ModelStringInput
-  description: ModelStringInput
-  and: [ModelTodoConditionInput]
-  or: [ModelTodoConditionInput]
-  not: ModelTodoConditionInput
+input ModelPostConditionInput {
+  type: ModelStringInput
+  content: ModelStringInput
+  timestamp: ModelIntInput
+  and: [ModelPostConditionInput]
+  or: [ModelPostConditionInput]
+  not: ModelPostConditionInput
 }
 
 type Subscription {
-  onCreateTodo: Todo @aws_subscribe(mutations: ["createTodo"])
-  onUpdateTodo: Todo @aws_subscribe(mutations: ["updateTodo"])
-  onDeleteTodo: Todo @aws_subscribe(mutations: ["deleteTodo"])
+  onCreatePost: Post @aws_subscribe(mutations: ["createPost"])
+  onDeletePost: Post @aws_subscribe(mutations: ["deletePost"])
+}
+
+input ModelIntKeyConditionInput {
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
 }
