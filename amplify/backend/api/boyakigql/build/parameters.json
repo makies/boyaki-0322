@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "boyakigql",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authamplify032269327c15",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "S3DeploymentBucket": "amplify-amplify0322-dev-200149-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/884ab4ce9a6ad7c93d68ed538fd4dcfb798cb7b9"
+}

@@ -33,5 +33,22 @@
       },
       "lastPushDirHash": "ZLfiy2jHjNmboj4OEH5zizU9v24="
     }
+  },
+  "api": {
+    "boyakigql": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authamplify032269327c15"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
   }
 }
